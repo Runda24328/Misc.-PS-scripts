@@ -7,7 +7,7 @@ Obecne rady:
 
 Autor: Daniel Miks
 Verze: 1.0 - Prvni vydani
-Skript je poskytován tak, jak je, nenesu žádnou odpovědnost za případné škody způsobené tímto skriptem.
+Skript je poskytovan tak, jak je, nenesu zadnou odpovednost za pripadne skody zpusobené timto skriptem.
 #>
 
 # KROK 1 - Oznac blok textu mezi hranicemi a stiskni F8. Zpresneni systemoveho timeru, je potreba spoustet 1x vzdy pri otevreni tohoto skriptu. Po ukonceni PowerShell procesu se opet uvede do puvodniho stavu.
