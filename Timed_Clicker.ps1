@@ -7,7 +7,7 @@ Obecne rady:
 
 Autor: Daniel Miks
 Verze: 1.0 - Prvni vydani
-Skript je poskytovan tak, jak je, nenesu zadnou odpovednost za pripadne skody zpusobené timto skriptem.
+Skript je poskytován tak, jak je, nenesu žádnou odpovědnost za případné škody způsobené tímto skriptem.
 #>
 
 # KROK 1 - Oznac blok textu mezi hranicemi a stiskni F8. Zpresneni systemoveho timeru, je potreba spoustet 1x vzdy pri otevreni tohoto skriptu. Po ukonceni PowerShell procesu se opet uvede do puvodniho stavu.
@@ -47,7 +47,7 @@ function MeasureDelay([int]$Sleep) {
     #Mezitim si priprav utok/obranu ve hre tak, aby stacilo jen kliknout na tlacitko k poslani jednotek. Pak umisti kurzor nad tlacitko a cekej.
 #Zdroj: https://stackoverflow.com/questions/39353073/how-i-can-send-mouse-click-in-powershell
 #----------------------------------------------------------------------------------------------------------------
-$Cas_nastaveny = "19:56:02.521"
+$Cas_nastaveny = Read-Host -Prompt "Zadej cas ve formatu hh:mm:ss.xxx"
 $Cas_realny = Get-Date -Format HH:mm:ss.fff
 do{
     $Cas_realny = Get-Date -Format HH:mm:ss.fff
@@ -63,3 +63,6 @@ $Rozdil = [System.DateTime]$Cas_realny-[System.DateTime]$Cas_nastaveny
 Write-Host "Cas vykonani akce: $($Cas_realny)" -ForegroundColor Green
 Write-Host "Doba trvani: $($Rozdil.Milliseconds) ms" -ForegroundColor Yellow
 #----------------------------------------------------------------------------------------------------------------
+
+Write-Host -NoNewLine 'Press any key to continue...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
