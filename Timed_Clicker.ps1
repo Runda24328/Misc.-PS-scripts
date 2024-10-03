@@ -27,13 +27,13 @@ $WinMM = Add-Type -MemberDefinition $timeBeginPeriod,$timeEndPeriod -Name 'WinMM
 Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern void mouse_event(int flags, int dx, int dy, int cButtons, int info);' -Name U32 -Namespace W;
 
 #Aktivace zpresneni
-$WinMM::timeBeginPeriod(1)
+$WinMM::timeBeginPeriod(1) | Out-Null
 #----------------------------------------------------------------------------------------------------------------
 
 
 # KROK 2 - Oznac blok textu mezi hranicemi a stiskni F8. Overeni, ze timer je spravne nastaveny. Pokud je hodnota vystupu kolem 15, pak je nastaveni spatne. Musi být okolo 0.8.
 #----------------------------------------------------------------------------------------------------------------
-function MeasureDelay([int]$Sleep) {
+<#function MeasureDelay([int]$Sleep) {
     $Start = [System.Diagnostics.Stopwatch]::GetTimestamp()
     [System.Threading.Thread]::Sleep($Sleep)
     $End = [System.Diagnostics.Stopwatch]::GetTimestamp()
@@ -41,6 +41,7 @@ function MeasureDelay([int]$Sleep) {
 }
 
 1..100 | % {MeasureDelay 1} | Measure-Object -Average | Select -ExpandProperty Average
+#>
 #----------------------------------------------------------------------------------------------------------------
 
 # KROK 3 - Do hodnoty $Cas_nastaveny zadej cas, kdy chces, aby skript klikl. Oznac blok textu mezi hranicemi a stiskni F8. Skript zacne cekat na nastaveny cas.
@@ -48,6 +49,7 @@ function MeasureDelay([int]$Sleep) {
 #Zdroj: https://stackoverflow.com/questions/39353073/how-i-can-send-mouse-click-in-powershell
 #----------------------------------------------------------------------------------------------------------------
 $Cas_nastaveny = Read-Host -Prompt "Zadej cas ve formatu hh:mm:ss.xxx"
+Write-Output "Cekani na nastaveny cas..."
 $Cas_realny = Get-Date -Format HH:mm:ss.fff
 do{
     $Cas_realny = Get-Date -Format HH:mm:ss.fff
